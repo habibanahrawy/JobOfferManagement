@@ -1,1 +1,5 @@
-<Solution />
+<Solution>
+  <Project Path="JobOffer.Core/JobOffer.Core.csproj" />
+  <Project Path="JobOffer.Infrastructure/JobOffer.Infrastructure.csproj" />
+  <Project Path="JobOffer.WebAPI/JobOffer.WebAPI.csproj" />
+</Solution>

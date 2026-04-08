@@ -1,3 +1,8 @@
+using JobOffer.Core.Entities;
+using JobOffer.Infrastructure.DbContexts;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 public partial class Program
 {
     private static void Main(string[] args)
@@ -9,7 +14,15 @@ public partial class Program
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
+        });
+
+        builder.Services.AddIdentity<User, IdentityRole>()
+               .AddEntityFrameworkStores<AppDbContext>();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
