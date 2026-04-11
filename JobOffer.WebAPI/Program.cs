@@ -1,7 +1,14 @@
+using JobOffer.Application.Contracts;
+using JobOffer.Application.Features.Categories.Handlers;
+using JobOffer.Application.Profiles;
+using JobOffer.Core.Contracts;
 using JobOffer.Core.Entities;
 using JobOffer.Infrastructure.DbContexts;
+using JobOffer.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+
 
 public partial class Program
 {
@@ -23,12 +30,26 @@ public partial class Program
 
         builder.Services.AddIdentity<User, IdentityRole>()
                .AddEntityFrameworkStores<AppDbContext>();
+
+        builder.Services.AddAutoMapper(X => X.LicenseKey = "", typeof(MappingProfile).Assembly);
+        builder.Services.AddScoped<IUnitOfWork , UnitOfWork>();
+        builder.Services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(GetAllCategoriesHandler).Assembly);
+        });
+
         var app = builder.Build();
+
+       
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/openapi/v1.json", "JobOfferManagement API");
+            });
         }
 
         app.UseHttpsRedirection();
