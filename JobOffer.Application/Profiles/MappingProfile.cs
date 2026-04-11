@@ -12,6 +12,7 @@ namespace JobOffer.Application.Profiles
         public MappingProfile()
         {
             CreateMap<Category , CategoryDTO>().ReverseMap();
+            CreateMap<Types , TypeDTO>().ReverseMap();
         }
     }
 }

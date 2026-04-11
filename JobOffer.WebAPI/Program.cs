@@ -8,6 +8,7 @@ using JobOffer.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
+using JobOffer.Application.Features.Typies.Handlers;
 
 
 public partial class Program
@@ -36,6 +37,10 @@ public partial class Program
         builder.Services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(GetAllCategoriesHandler).Assembly);
+        });
+        builder.Services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(GetAllTypiesHandler).Assembly);
         });
 
         var app = builder.Build();
