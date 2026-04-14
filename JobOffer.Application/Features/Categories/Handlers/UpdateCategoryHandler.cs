@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JobOffer.Application.DTOs;
-using JobOffer.Application.Features.Categories.Commands;
-using JobOffer.Core.Contracts;
-using JobOffer.Core.Lookups;
-using MediatR;
+﻿
 
 namespace JobOffer.Application.Features.Categories.Handlers
 {

@@ -1,4 +1,4 @@
-using JobOffer.Application.Contracts;
+
 using JobOffer.Application.Features.Categories.Handlers;
 using JobOffer.Application.Profiles;
 using JobOffer.Core.Contracts;
@@ -7,7 +7,6 @@ using JobOffer.Infrastructure.DbContexts;
 using JobOffer.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MediatR;
 using JobOffer.Application.Features.Typies.Handlers;
 
 

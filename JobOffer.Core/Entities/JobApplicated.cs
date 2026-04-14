@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JobOffer.Core.Enums;
+﻿
 
 namespace JobOffer.Core.Entities
 {

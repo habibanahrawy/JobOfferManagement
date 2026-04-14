@@ -1,9 +1,4 @@
-﻿using JobOffer.Application.Features.Categories.Commands;
-using JobOffer.Application.Features.Categories.Queries;
-using JobOffer.Application.Features.Typies.Commands;
-using JobOffer.Application.Features.Typies.Queries;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace JobOffer.WebAPI.Controllers
 {

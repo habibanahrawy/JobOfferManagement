@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using JobOffer.Application.Contracts;
-using JobOffer.Application.DTOs;
-using JobOffer.Application.Features.Categories.Commands;
-using JobOffer.Application.Features.Categories.Queries;
-using JobOffer.Core.Contracts;
-using JobOffer.Core.Lookups;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace JobOffer.WebAPI.Controllers
 {

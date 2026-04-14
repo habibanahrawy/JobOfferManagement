@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JobOffer.Core.Enums;
-using JobOffer.Core.Lookups;
-using Microsoft.AspNetCore.Identity;
+﻿
 
 namespace JobOffer.Core.Entities
 {

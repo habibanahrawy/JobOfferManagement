@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="JobOffer.Application/JobOffer.Application.csproj" />
   <Project Path="JobOffer.Core/JobOffer.Core.csproj" />
   <Project Path="JobOffer.Infrastructure/JobOffer.Infrastructure.csproj" />

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JobOffer.Application.Contracts;
-using JobOffer.Core;
-using JobOffer.Core.Contracts;
-using JobOffer.Core.Lookups;
-using JobOffer.Infrastructure.DbContexts;
+﻿using JobOffer.Core.Contracts;
+
 
 namespace JobOffer.Infrastructure.Repositories
 {

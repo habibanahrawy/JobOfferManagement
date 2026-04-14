@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JobOffer.Application.Contracts;
-using JobOffer.Core;
-using JobOffer.Infrastructure.DbContexts;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-
+﻿
 namespace JobOffer.Infrastructure.Repositories
 {
     public class GenericReposoitory<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : BaseEntity<TKey>

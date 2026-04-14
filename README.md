@@ -1,10 +1,10 @@
 # Employee Job Offer Management System
 
-A comprehensive backend system for managing employee job offers and department workflows, built with **.NET 10** and **Clean Architecture**.
+A streamlined backend system for managing job offers and employee applications, built with **.NET 10** and **Clean Architecture**.
 
 ## 1. Project Architecture
 The solution follows the **Separation of Concerns** principle through four main layers:
-- **Core:** Domain Entities, Enums, and Core Interfaces.
+- **Core:** Entities, Enums, and Interfaces.
 - **Application:** CQRS Pattern (MediatR), DTOs, and Business Logic.
 - **Infrastructure:** Data Persistence (EF Core), Repositories, and Migrations.
 - **WebAPI:** REST Endpoints and Middleware.
@@ -36,4 +36,4 @@ The solution follows the **Separation of Concerns** principle through four main 
 - **Framework:** .NET 10
 - **ORM:** Entity Framework Core (SQL Server)
 - **Patterns:** CQRS, Repository, Unit of Work
-- **Libraries:** MediatR, AutoMapper, FluentValidation
+- **Libraries:** MediatR, AutoMapper, FluentValidation , Swagger UI

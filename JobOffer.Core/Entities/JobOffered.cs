@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JobOffer.Core.Lookups;
+﻿
 
 namespace JobOffer.Core.Entities
 {

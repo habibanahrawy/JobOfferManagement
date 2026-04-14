@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
+﻿using System.Reflection;
 using JobOffer.Core.Entities;
-using JobOffer.Core.Enums;
-using JobOffer.Core.Lookups;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 
 namespace JobOffer.Infrastructure.DbContexts
 {
