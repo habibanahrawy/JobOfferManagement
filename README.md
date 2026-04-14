@@ -1,4 +1,4 @@
-# Employee Job Offer Management System
+# Job Offer Management System
 
 A streamlined backend system for managing job offers and employee applications, built with **.NET 10** and **Clean Architecture**.
 

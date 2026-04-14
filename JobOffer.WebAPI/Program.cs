@@ -8,6 +8,8 @@ using JobOffer.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using JobOffer.Application.Features.Typies.Handlers;
+using JobOffer.Application.Features.Cities.Handlers;
+using JobOffer.Application.Features.Countries.Handlers;
 
 
 public partial class Program
@@ -40,6 +42,14 @@ public partial class Program
         builder.Services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(GetAllTypiesHandler).Assembly);
+        });
+        builder.Services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(GetAllCitiesHandler).Assembly);
+        });
+        builder.Services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(GetAllCountriesHandler).Assembly);
         });
 
         var app = builder.Build();
