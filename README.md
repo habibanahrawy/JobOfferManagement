@@ -10,27 +10,27 @@ The solution follows the **Separation of Concerns** principle through four main 
 - **WebAPI:** REST Endpoints and Middleware.
 
 ## 2. Technical Implementation Details
-- **Decoupled Attachment System:** Files (CVs and Digital Signatures) are isolated in a centralized `Attachments` table to optimize query performance.
+- **Integrated File Storage:** User CVs and Digital Signatures are managed via a dedicated File Service, storing relative paths to optimize database performance.
 - **Service Extensions:** Clean `Program.cs` via layer-specific Service Registration methods.
-- **Global Usings:**
+- **Global Usings**
 
 ## 3. Implementation Roadmap
 
 ### Foundations
 - [x] Solution Layers & Project References.
-- [x] Identity System with Custom User Entity.
 - [x] Lookup Data (Countries, Cities, Types , Categories).
+- [x] Identity System with Custom User Entity.
 - [x] Database Seeding & Migrations.
+
+### Integration & Security
+- [x] **JWT Authentication:** Token-based security and Role-based authorization.
+- [ ] **Exception Handling:** Standardized API response format.
+- [ ] **SMTP Integration:** Automated email notifications for new offers.
 
 ### Core Business Logic
 - [ ] **JobOffer Module:** Implementation of CRUD operations.
 - [ ] **Workflow Actions:** Employee Accept/Reject functionality.
 - [ ] **Signature Logic:** Linking digital signatures to accepted offers via `AttachmentId`.
-
-### Integration & Security
-- [ ] **SMTP Integration:** Automated email notifications for new offers.
-- [ ] **JWT Authentication:** Token-based security and Role-based authorization.
-- [ ] **Global Exception Handling:** Standardized API response format.
 
 ## Tech Stack
 - **Framework:** .NET 10

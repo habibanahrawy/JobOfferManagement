@@ -1,5 +1,4 @@
 ﻿
-
 namespace JobOffer.WebAPI.Controllers
 {
 
@@ -42,9 +41,10 @@ namespace JobOffer.WebAPI.Controllers
 
 
 
-        // Admin
+       
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCity(CreateCity createCity)
         {
             var city = await _mediator.Send(createCity);
@@ -56,6 +56,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpPost("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCity(int id, [FromBody] UpdateCity updateCity)
         {
             if (id != updateCity.id) return NotFound();
@@ -70,6 +71,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCity(int id)
         {
 

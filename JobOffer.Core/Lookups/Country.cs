@@ -1,5 +1,4 @@
 ﻿
-
 namespace JobOffer.Core.Lookups
 {
     public class Country : BaseEntity<int>

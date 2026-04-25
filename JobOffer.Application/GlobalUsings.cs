@@ -4,15 +4,16 @@ global using JobOffer.Application.DTOs;
 global using AutoMapper;
 global using JobOffer.Core.Lookups;
 global using JobOffer.Core.Contracts;
-global using JobOffer.Application.Features.Categories.Commands;
-global using JobOffer.Application.Features.Categories.Queries;
-global using JobOffer.Application.Features.Typies.Commands;
-global using JobOffer.Application.Features.Typies.Queries;
-global using JobOffer.Application.Features.Cities.Queries;
-global using JobOffer.Application.Features.Cities.Commands;
-global using JobOffer.Application.Features.Countries.Queries;
-global using JobOffer.Application.Features.Countries.Commands;
-
-
-
-
+global using JobOffer.Application.Services.Categories.Commands;
+global using JobOffer.Application.Services.Categories.Queries;
+global using JobOffer.Application.Services.Typies.Commands;
+global using JobOffer.Application.Services.Typies.Queries;
+global using JobOffer.Application.Services.Cities.Queries;
+global using JobOffer.Application.Services.Cities.Commands;
+global using JobOffer.Application.Services.Countries.Queries;
+global using JobOffer.Application.Services.Countries.Commands;
+global using Microsoft.AspNetCore.Http;
+global using JobOffer.Application.Services.Account.Commands;
+global using JobOffer.Core.Entities;
+global using Microsoft.AspNetCore.Identity;
+global using JobOffer.Application.Services.CommonHandler;

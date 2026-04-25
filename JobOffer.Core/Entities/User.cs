@@ -4,12 +4,14 @@ namespace JobOffer.Core.Entities
 {
     public class User : IdentityUser
     {
-        public string FullName { get; set; } = string.Empty;
-        public string? CV { get; set; }
+        public string FullName { get; set; } = null!;
+        public string CVFile { get; set; } = null!;
+
 
 
         #region Relations
-        public Gender gender { get; set; }
+
+        public Gender Gender { get; set; }
 
 
         public int CityId { get; set; }
@@ -17,5 +19,6 @@ namespace JobOffer.Core.Entities
 
 
         #endregion
+
     }
 }

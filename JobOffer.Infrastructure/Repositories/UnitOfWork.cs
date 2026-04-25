@@ -1,6 +1,4 @@
-﻿using JobOffer.Core.Contracts;
-
-
+﻿
 namespace JobOffer.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
@@ -30,8 +28,9 @@ namespace JobOffer.Infrastructure.Repositories
             return newrepo;
 
         }
-        
+       
 
-        public async Task<int> SaveChangesAsync() => await _dbContext.SaveChangesAsync();
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await _dbContext.SaveChangesAsync(cancellationToken);
+
     }
 }

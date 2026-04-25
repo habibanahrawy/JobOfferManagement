@@ -1,5 +1,4 @@
 ﻿
-
 namespace JobOffer.WebAPI.Controllers
 {
 
@@ -42,9 +41,10 @@ namespace JobOffer.WebAPI.Controllers
 
 
 
-        // Admin
+        
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> CreateCategory(CreateCategory createCategory)
         {
            var category = await _mediator.Send(createCategory);
@@ -56,6 +56,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpPost("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCategory(int id , [FromBody] UpdateCategory updateCategory)
         {
             if (id != updateCategory.id) return NotFound();
@@ -70,6 +71,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
 
@@ -77,9 +79,6 @@ namespace JobOffer.WebAPI.Controllers
             return Ok(category);
 
         }
-
-
-
 
     }
 }

@@ -14,7 +14,7 @@ namespace JobOffer.Core.Entities
         #region Relations
 
         public int TypeId { get; set; }
-        public Types type { get; set; } = null!;
+        public Typess type { get; set; } = null!;
 
 
         public int CategoryId { get; set; }

@@ -1,5 +1,4 @@
 ﻿
-
 namespace JobOffer.Application.Profiles
 {
     public class MappingProfile : Profile
@@ -7,9 +6,16 @@ namespace JobOffer.Application.Profiles
         public MappingProfile()
         {
             CreateMap<Category , CategoryDTO>().ReverseMap();
-            CreateMap<Types , TypeDTO>().ReverseMap();
+            CreateMap<CreateCategory, Category>().ReverseMap();
+
             CreateMap<City , CityDTO>().ReverseMap();
+            CreateMap<CreateCity , City>().ReverseMap();
+
             CreateMap<Country , CountryDTO>().ReverseMap();
+            CreateMap<CreateCountry , Country>().ReverseMap();
+
+            CreateMap<Typess , TypeDTO>().ReverseMap();
+            CreateMap<CreateType , Type>().ReverseMap();
         }
     }
 }

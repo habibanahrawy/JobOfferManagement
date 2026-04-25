@@ -30,10 +30,11 @@ namespace JobOffer.Infrastructure.Repositories
         }
 
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbContext.Set<TEntity>().ToListAsync();
+        public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().ToListAsync(cancellationToken);
+   
 
 
-        public async Task<TEntity?> GetByIdAsync(TKey id) => await _dbContext.Set<TEntity>().FindAsync(id); 
+        public async Task<TEntity?> GetByIdAsync(TKey id, CancellationToken cancellationToken = default)=> await _dbContext.Set<TEntity>().FindAsync(id ,cancellationToken );
 
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
