@@ -1,8 +1,6 @@
-﻿
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 
-
-namespace JobOffer.Infrastructure
+namespace JobOffer.Infrastructure.ServicesImplementation
 {
     public class AttachmentService : IAttachmentService
     {

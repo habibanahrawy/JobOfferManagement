@@ -7,10 +7,12 @@ namespace JobOffer.Infrastructure.DbContexts
     public class AppDbContext : IdentityDbContext<User>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ITenantService _tenantService;
 
-        public AppDbContext(DbContextOptions<AppDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options, IHttpContextAccessor httpContextAccessor , ITenantService tenantService) : base(options)
         {
             _httpContextAccessor = httpContextAccessor;
+            _tenantService = tenantService;
         }
 
 
@@ -29,6 +31,7 @@ namespace JobOffer.Infrastructure.DbContexts
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+            builder.Entity<JobOffered>().HasQueryFilter(X => X.TenantId == _tenantService.GetCurrentTenant());
 
 
             builder.Entity<JobOffered>(X =>
@@ -100,13 +103,12 @@ namespace JobOffer.Infrastructure.DbContexts
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-
-            var userName = _httpContextAccessor.HttpContext?.User?.FindFirst("name")?.Value;
-
+            var currentTenant = _tenantService.GetCurrentTenant();
+            var userName =_httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "Any";
 
             var entries = ChangeTracker.Entries()
-                                       .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
-                                       .ToList();
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
+                .ToList();
 
             foreach (var entry in entries)
             {
@@ -114,13 +116,22 @@ namespace JobOffer.Infrastructure.DbContexts
 
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Property("CreatedOn").CurrentValue = DateTime.UtcNow;
-                    entry.Property("CreatedBy").CurrentValue = userName;
+                    if (entry.Metadata.FindProperty("CreatedOn") != null)
+                        entry.Property("CreatedOn").CurrentValue = DateTime.UtcNow;
+
+                    if (entry.Metadata.FindProperty("CreatedBy") != null)
+                        entry.Property("CreatedBy").CurrentValue = userName;
+
+                    if (entry.Metadata.FindProperty("TenantId") != null)
+                        entry.Property("TenantId").CurrentValue = currentTenant;
                 }
                 else if (entry.State == EntityState.Modified)
                 {
-                    entry.Property("EditedOn").CurrentValue = DateTime.UtcNow;
-                    entry.Property("EditedBy").CurrentValue = userName;
+                    if (entry.Metadata.FindProperty("EditedOn") != null)
+                        entry.Property("EditedOn").CurrentValue = DateTime.UtcNow;
+
+                    if (entry.Metadata.FindProperty("EditedBy") != null)
+                        entry.Property("EditedBy").CurrentValue = userName;
                 }
 
                 var auditLog = new Audit
@@ -130,7 +141,7 @@ namespace JobOffer.Infrastructure.DbContexts
                     UserName = userName,
                     OldValues = entry.State == EntityState.Added ? null : JsonSerializer.Serialize(entry.OriginalValues.ToObject()),
                     NewValues = entry.State == EntityState.Deleted ? null : JsonSerializer.Serialize(entry.CurrentValues.ToObject()),
-                    CreatedBy = userName ,
+                    CreatedBy = userName,
                     IsDeleted = entry.State == EntityState.Deleted,
                     DeletedBy = entry.State == EntityState.Deleted ? userName : null,
                     DeletedOn = entry.State == EntityState.Deleted ? DateTime.UtcNow : null,

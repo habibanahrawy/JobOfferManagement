@@ -9,3 +9,8 @@ global using JobOffer.Application.Services.Cities.Commands;
 global using JobOffer.Application.Services.Countries.Commands;
 global using JobOffer.Application.Services.Countries.Queries;
 global using Microsoft.AspNetCore.Authorization;
+global using JobOffer.Core.Entities;
+global using Microsoft.AspNetCore.Identity;
+global using JobOffer.Application.DTOs;
+global using Microsoft.EntityFrameworkCore;
+global using JobOffer.Application.Services.Account.Commands;

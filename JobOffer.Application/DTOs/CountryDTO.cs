@@ -1,6 +1,4 @@
-﻿
-
-namespace JobOffer.Application.DTOs
+﻿namespace JobOffer.Application.DTOs
 {
     public class CountryDTO
     {

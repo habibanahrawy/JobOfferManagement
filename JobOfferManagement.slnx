@@ -2,6 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path="Directory.Packages.props" />
     <File Path="README.md" />
+    <File Path="Tasks.txt" />
   </Folder>
   <Project Path="JobOffer.Application/JobOffer.Application.csproj" />
   <Project Path="JobOffer.Core/JobOffer.Core.csproj" />

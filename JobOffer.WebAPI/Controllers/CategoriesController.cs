@@ -18,6 +18,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpGet]
+        [HasPermission(Permissions.Categories.View)]
         public async Task<IActionResult> GetAllCategory()
         {
             var categories = await _mediator.Send(new GetAllCategories());
@@ -29,6 +30,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpGet("{id}")]
+        [HasPermission(Permissions.Categories.View)]
         public async Task<IActionResult> GetCategoryById(int id)
         {
             var category = await _mediator.Send(new GetCategoryById(id));
@@ -44,7 +46,7 @@ namespace JobOffer.WebAPI.Controllers
         
 
         [HttpPost]
-        [Authorize(Roles ="Admin")]
+        [HasPermission(Permissions.Categories.Create)]
         public async Task<IActionResult> CreateCategory(CreateCategory createCategory)
         {
            var category = await _mediator.Send(createCategory);
@@ -56,7 +58,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpPost("{id}")]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Categories.Update)]
         public async Task<IActionResult> UpdateCategory(int id , [FromBody] UpdateCategory updateCategory)
         {
             if (id != updateCategory.id) return NotFound();
@@ -71,7 +73,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Categories.Delete)]
         public async Task<IActionResult> DeleteCategory(int id)
         {
 

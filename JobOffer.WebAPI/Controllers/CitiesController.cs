@@ -18,6 +18,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpGet]
+        [HasPermission(Permissions.Cities.View)]
         public async Task<IActionResult> GetAllCities()
         {
             var cities = await _mediator.Send(new GetAllCities());
@@ -29,6 +30,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpGet("{id}")]
+        [HasPermission(Permissions.Cities.View)]
         public async Task<IActionResult> GetCityById(int id)
         {
             var city = await _mediator.Send(new GetCityById(id));
@@ -44,7 +46,7 @@ namespace JobOffer.WebAPI.Controllers
        
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Cities.Create)]
         public async Task<IActionResult> CreateCity(CreateCity createCity)
         {
             var city = await _mediator.Send(createCity);
@@ -56,7 +58,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpPost("{id}")]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Cities.Update)]
         public async Task<IActionResult> UpdateCity(int id, [FromBody] UpdateCity updateCity)
         {
             if (id != updateCity.id) return NotFound();
@@ -71,7 +73,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Cities.Delete)]
         public async Task<IActionResult> DeleteCity(int id)
         {
 
@@ -79,9 +81,6 @@ namespace JobOffer.WebAPI.Controllers
             return Ok(city);
 
         }
-
-
-
 
     }
 }

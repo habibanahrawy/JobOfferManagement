@@ -18,6 +18,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpGet]
+        [HasPermission(Permissions.Typess.View)]
         public async Task<IActionResult> GetAllType()
         {
             var typies = await _mediator.Send(new GetAllTypies());
@@ -29,6 +30,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpGet("{id}")]
+        [HasPermission(Permissions.Typess.View)]
         public async Task<IActionResult> GetTypeById(int id)
         {
             var type = await _mediator.Send(new GetTypeById(id));
@@ -44,7 +46,7 @@ namespace JobOffer.WebAPI.Controllers
        
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Typess.Create)]
         public async Task<IActionResult> CreateType(CreateType createType)
         {
             var type = await _mediator.Send(createType);
@@ -56,7 +58,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpPost("{id}")]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Typess.Update)]
         public async Task<IActionResult> UpdateType(int id, [FromBody] UpdateType updateType)
         {
             if (id != updateType.id) return NotFound();
@@ -71,7 +73,7 @@ namespace JobOffer.WebAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Typess.Delete)]
         public async Task<IActionResult> DeleteType(int id)
         {
 
@@ -79,9 +81,6 @@ namespace JobOffer.WebAPI.Controllers
             return Ok(type);
 
         }
-
-
-
 
     }
 }

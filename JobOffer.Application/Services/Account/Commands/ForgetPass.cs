@@ -1,5 +1,5 @@
 ﻿
 namespace JobOffer.Application.Services.Account.Commands
 {
-    public record Login(LoginDTO LoginDTO) : IRequest<AuthDTO>;
+    public record ForgetPass(string email) : IRequest<bool>;
 }

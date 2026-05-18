@@ -1,0 +1,12 @@
+
+Role Seed (appsetting , Manage user secrets)
+
+Permission based authorization
+Permissions Controller
+Roles Controller
+
+Login (ForgetPass - RefreshToken - ResetPass)
+
+Register Controller (Employee - User)
+
+Multi Tenant (Tenant Service)

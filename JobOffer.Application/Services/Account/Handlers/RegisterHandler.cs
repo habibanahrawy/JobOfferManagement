@@ -1,5 +1,4 @@
-﻿
-using JobOffer.Application.Services.Attachment;
+﻿using JobOffer.Application.Services.Attachment;
 using JobOffer.Core.Enums;
 
 

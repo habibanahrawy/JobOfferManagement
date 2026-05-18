@@ -1,5 +1,4 @@
 ﻿
-
 namespace JobOffer.Core.Entities
 {
     public class JobOffered : BaseEntity<int>
@@ -8,6 +7,7 @@ namespace JobOffer.Core.Entities
         public string Description { get; set; } = string.Empty;
         public decimal Salary { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public string TenantId { get; set; }
 
 
 

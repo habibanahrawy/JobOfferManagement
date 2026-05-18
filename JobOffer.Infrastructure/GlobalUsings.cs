@@ -13,4 +13,4 @@ global using Microsoft.IdentityModel.Tokens;
 global using System.Text;
 global using JobOffer.Application.Services;
 global using Microsoft.AspNetCore.Http;
-
+global using Microsoft.AspNetCore.Authorization;

@@ -1,6 +1,8 @@
 ﻿
+using JobOffer.Infrastructure.Authorization;
 using JobOffer.Infrastructure.DataSeed;
 using JobOffer.Infrastructure.Repositories;
+using JobOffer.Infrastructure.ServicesImplementation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -53,7 +55,25 @@ namespace JobOffer.Infrastructure.StaticMethod
                 };
             });
 
-            
+
+            Services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+
+            Services.AddAuthorization(options =>
+            {
+                foreach (var prop in typeof(Permissions).GetNestedTypes())
+                {
+                    foreach (var field in prop.GetFields())
+                    {
+                        var permissionValue = field.GetValue(null).ToString();
+
+                        options.AddPolicy(permissionValue, policy =>
+                            policy.Requirements.Add(new Permission(permissionValue)));
+                    }
+                }
+            });
+
+
+            Services.AddScoped<ITenantService, TenantService>();
 
             return Services;
         }

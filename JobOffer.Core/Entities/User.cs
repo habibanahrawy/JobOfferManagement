@@ -1,13 +1,12 @@
 ﻿
-
 namespace JobOffer.Core.Entities
 {
     public class User : IdentityUser
     {
         public string FullName { get; set; } = null!;
-        public string CVFile { get; set; } = null!;
-
-
+        public string? CVFile { get; set; } 
+        public string? RefreshToken { get; set; }
+        public DateTime? ExpiredTimeToken { get; set; }
 
         #region Relations
 

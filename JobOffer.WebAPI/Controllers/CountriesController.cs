@@ -1,4 +1,5 @@
-﻿namespace JobOffer.WebAPI.Controllers
+﻿
+namespace JobOffer.WebAPI.Controllers
 {
 
     [ApiController]
@@ -18,6 +19,7 @@
 
 
         [HttpGet]
+        [HasPermission(Permissions.Countries.View)]
         public async Task<IActionResult> GetAllCountry()
         {
             var countries = await _mediator.Send(new GetAllCountries());
@@ -29,6 +31,7 @@
 
 
         [HttpGet("{id}")]
+        [HasPermission(Permissions.Countries.View)]
         public async Task<IActionResult> GetCountryById(int id)
         {
             var country = await _mediator.Send(new GetCountryById(id));
@@ -44,7 +47,7 @@
         
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Countries.Create)]
         public async Task<IActionResult> CreateCountry(CreateCountry createCountry)
         {
             var country = await _mediator.Send(createCountry);
@@ -56,7 +59,7 @@
 
 
         [HttpPost("{id}")]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Countries.Update)]
         public async Task<IActionResult> UpdateCountry(int id, [FromBody] UpdateCountry updateCountry)
         {
             if (id != updateCountry.id) return NotFound();
@@ -71,15 +74,12 @@
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        [HasPermission(Permissions.Countries.Delete)]
         public async Task<IActionResult> DeleteCountry(int id)
         {
             var country = await _mediator.Send(new DeleteCategory(id));
             return Ok(country);
 
         }
-
-
-
     }
 }

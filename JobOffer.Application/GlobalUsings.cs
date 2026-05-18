@@ -17,3 +17,4 @@ global using JobOffer.Application.Services.Account.Commands;
 global using JobOffer.Core.Entities;
 global using Microsoft.AspNetCore.Identity;
 global using JobOffer.Application.Services.CommonHandler;
+global using System.Security.Claims;

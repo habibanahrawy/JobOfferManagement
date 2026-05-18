@@ -1,5 +1,4 @@
-﻿
-using JobOffer.Core.Enums;
+﻿using JobOffer.Core.Enums;
 
 namespace JobOffer.Infrastructure.DataSeed
 {
@@ -7,11 +6,15 @@ namespace JobOffer.Infrastructure.DataSeed
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IConfiguration _configuration;
 
-        public RoleSeed(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public RoleSeed(UserManager<User> userManager,
+                        RoleManager<IdentityRole> roleManager,
+                        IConfiguration configuration)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _configuration = configuration;
         }
 
         public async Task Seeding()
@@ -25,43 +28,53 @@ namespace JobOffer.Infrastructure.DataSeed
                     await _roleManager.CreateAsync(new IdentityRole("User"));
                 }
 
-                if (await _userManager.FindByEmailAsync("habibamoh@gmail.com") == null)
-                {
-                    var user01 = new User
-                    {
-                        FullName = "Habiba MohNahr",
-                        Gender = Gender.Female,
-                        UserName = "habibamohnahr",
-                        Email = "habibamoh@gmail.com",
-                        CityId = 1,
-                        CVFile = "cv.pdf"
-                    };
-
-                    var user02 = new User
-                    {
-                        FullName = "Marya Fayed",
-                        UserName = "maryafayed",
-                        Gender = Gender.Female,
-                        Email = "maryafayed@gmail.com",
-                        CityId = 1,
-                        CVFile = "cv.pdf"
-                    };
-
-
-                    await _userManager.CreateAsync(user01, "P@ssw0rd123");
-                    await _userManager.CreateAsync(user02, "P@ssw0rd123");
-
-
-                    await _userManager.AddToRoleAsync(user01, "Admin");
-                    await _userManager.AddToRoleAsync(user02, "SuperAdmin");
-
-                }
+                await CreateUserFromConfig("AdminUser", "Admin");
+                await CreateUserFromConfig("SuperAdminUser", "SuperAdmin");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Seeding Error: {ex.Message}");
             }
+        }
 
+        private async Task CreateUserFromConfig(string configSection, string roleName)
+        {
+            var userEmail = _configuration[$"{configSection}:Email"];
+
+            if (string.IsNullOrEmpty(userEmail)) return;
+
+            var existingUser = await _userManager.FindByEmailAsync(userEmail);
+
+            if (existingUser == null)
+            {
+                var user = new User
+                {
+                    FullName = _configuration[$"{configSection}:FullName"],
+                    UserName = _configuration[$"{configSection}:UserName"],
+                    Email = userEmail,
+                    CityId = int.Parse(_configuration[$"{configSection}:CityId"] ?? "1"),
+                    CVFile = _configuration[$"{configSection}:CVFile"],
+                    Gender = _configuration[$"{configSection}:Gender"] == "Gender.Female" ? Gender.Female : Gender.Male,
+                    RefreshToken = string.Empty,
+                    ExpiredTimeToken = DateTime.UtcNow
+                };
+
+                var password = _configuration[$"{configSection}:Password"] ?? "P@ssword123";
+
+                var result = await _userManager.CreateAsync(user, password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, roleName);
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        Console.WriteLine($"User Creation Error: {error.Description}");
+                    }
+                }
+            }
         }
     }
 }
